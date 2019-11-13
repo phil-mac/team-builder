@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
+import {Container, Grid, Button, Typography} from '@material-ui/core';
 
 import './App.css';
 import Form from './components/Form';
+import Navigation from './components/Navigation';
+
 
 function App() {
   const [teamMembers, setTeamMembers] = useState(
@@ -44,23 +46,30 @@ function App() {
 
   return (
     <div className="App">
-      Team Members:
-      <hr />
-      <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editMember={editMember}/>
-      <hr />
-      {
-        teamMembers.map(member => {
-          return (
-            <div>
-              <h3>{member.name}</h3>
-              <h3>{member.email}</h3>
-              <h3>{member.role}</h3>
-              <button onClick={() => setMemberToEdit(member)}>edit</button>
-              <hr />
-            </div>
-          )
-        })
-      }
+      <Navigation />
+      <Container maxWidth='md' style={{paddingTop:'20px'}}>
+        <Grid container spacing={6}>
+          <Grid item xs='4' >
+            <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editMember={editMember}/>
+          </Grid>
+          <Grid item xs='8' >
+            <Typography variant='h4'>Members</Typography>
+            {
+            teamMembers.map(member => {
+              return (
+                <div>
+                  <h3>{member.name}</h3>
+                  <h3>{member.email}</h3>
+                  <h3>{member.role}</h3>
+                  <button onClick={() => setMemberToEdit(member)}>edit</button>
+                  <hr />
+                </div>
+              )
+            })
+          }
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 }
