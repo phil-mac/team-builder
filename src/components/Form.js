@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export default (props) => {
     const [newMember, setNewMember] = useState({name:'', email:'', role:''});
@@ -12,6 +12,12 @@ export default (props) => {
         props.addTeamMember(newMember);
         setNewMember({name:'', email:'', role:''});
     }
+
+    useEffect(() =>{
+        setNewMember(props.memberToEdit);
+    }, [props.memberToEdit])
+
+    
 
     return(
         <div>
