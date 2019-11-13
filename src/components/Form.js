@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 export default (props) => {
-    const [newMember, setNewMember] = useState({name:'', email:'', role:''});
+    const [newMember, setNewMember] = useState({name:'', email:'', role:'', id:-1});
 
     const handleChange = e => {
         setNewMember({...newMember, [e.target.name]:e.target.value});
@@ -9,15 +9,13 @@ export default (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.addTeamMember(newMember);
-        setNewMember({name:'', email:'', role:''});
+        props.memberToEdit.name !== '' ? props.editMember(newMember) : props.addTeamMember(newMember);
+        setNewMember({name:'', email:'', role:'', id:-1});
     }
 
     useEffect(() =>{
         setNewMember(props.memberToEdit);
     }, [props.memberToEdit])
-
-    
 
     return(
         <div>
@@ -32,7 +30,7 @@ export default (props) => {
                 <label htmlFor='role'>Role:</label>
                 <input id='role' name='role' type='text' onChange={handleChange} value={newMember.role}/>
 
-                <button>Add</button>
+                <button>Submit</button>
             </form>
         </div>
         
