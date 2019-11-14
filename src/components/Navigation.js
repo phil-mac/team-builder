@@ -6,16 +6,13 @@ import styled from 'styled-components';
 export default () =>{
 
     const TeamAppBar = styled(AppBar)`&&{
-        /* flex-grow: 1; */
-
-
         Button{
             margin: 0 20px;
         }
     }`
 
     return(
-        <TeamAppBar position="static">
+        <TeamAppBar position="sticky">
             <Toolbar>
                 <Typography variant="h6" className='title'>
                 Team Manager

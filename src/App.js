@@ -4,6 +4,8 @@ import {Container, Grid, Button, Typography} from '@material-ui/core';
 import './App.css';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
+import TeamMembers from './components/MemberList';
+import MemberList from './components/MemberList';
 
 
 function App() {
@@ -49,24 +51,11 @@ function App() {
       <Navigation />
       <Container maxWidth='md' style={{paddingTop:'20px'}}>
         <Grid container spacing={6}>
-          <Grid item xs='4' >
+          <Grid item xs='4'>
             <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editMember={editMember}/>
           </Grid>
-          <Grid item xs='8' >
-            <Typography variant='h4'>Members</Typography>
-            {
-            teamMembers.map(member => {
-              return (
-                <div>
-                  <h3>{member.name}</h3>
-                  <h3>{member.email}</h3>
-                  <h3>{member.role}</h3>
-                  <button onClick={() => setMemberToEdit(member)}>edit</button>
-                  <hr />
-                </div>
-              )
-            })
-          }
+          <Grid item xs='8'>
+            <MemberList teamMembers={teamMembers} setMemberToEdit={setMemberToEdit} />
           </Grid>
         </Grid>
       </Container>
