@@ -1,12 +1,10 @@
 import React, {useState} from 'react';
-import {Container, Grid, Button, Typography} from '@material-ui/core';
+import {Container, Grid, } from '@material-ui/core';
 
 import './App.css';
 import Form from './components/Form';
 import Navigation from './components/Navigation';
-import TeamMembers from './components/MemberList';
 import MemberList from './components/MemberList';
-
 
 function App() {
   const [teamMembers, setTeamMembers] = useState(
@@ -46,18 +44,28 @@ function App() {
     setMemberToEdit({name:'', email:'', role:''});
   }
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="App">
       <Navigation />
       <Container maxWidth='md' style={{paddingTop:'20px'}}>
-        <Grid container spacing={6}>
-          <Grid item xs='4'>
-            <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} editMember={editMember}/>
-          </Grid>
-          <Grid item xs='8'>
-            <MemberList teamMembers={teamMembers} setMemberToEdit={setMemberToEdit} />
-          </Grid>
-        </Grid>
+        {/* <Grid container spacing={6}> */}
+          {/* <Grid item xs={12} sm={4}> */}
+            <Form open={open} onClose={handleClose} addTeamMember={addTeamMember} memberToEdit={memberToEdit} editMember={editMember}/>
+          {/* </Grid> */}
+          {/* <Grid item xs={12} sm={8}> */}
+            <MemberList  teamMembers={teamMembers} setMemberToEdit={setMemberToEdit} handleClickOpen={handleClickOpen}/>
+          {/* </Grid> */}
+        {/* </Grid> */}
       </Container>
     </div>
   );
